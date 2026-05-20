@@ -1,0 +1,306 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.lp { width: 100%; font-family: system-ui, -apple-system, sans-serif; font-size: 13px; }
+.nav { background: #fff; border-bottom: 1px solid #e8e8e8; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
+.nav-logo { font-weight: 700; color: #EB2033; font-size: 15px; }
+.nav-links { display: flex; gap: 16px; font-size: 11px; color: #6C6E70; }
+.nav-btn { background: #EB2033; color: #fff; border: none; border-radius: 20px; padding: 6px 14px; font-size: 11px; font-weight: 600; cursor: pointer; }
+.hero { background: #770004; padding: 52px 24px 44px; text-align: center; }
+.eyebrow { font-size: 10px; font-weight: 700; color: #FFDD17; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+.hero-h1 { font-size: 34px; font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 14px; }
+.hero-sub { font-size: 13px; color: rgba(255,255,255,0.82); line-height: 1.7; max-width: 500px; margin: 0 auto 26px; }
+.btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.btn-y { background: #FFDD17; color: #000; border: none; border-radius: 24px; padding: 10px 22px; font-weight: 700; font-size: 12px; cursor: pointer; }
+.btn-w { background: transparent; color: #fff; border: 2px solid #fff; border-radius: 24px; padding: 10px 22px; font-weight: 600; font-size: 12px; cursor: pointer; }
+.cred { background: #fafafa; border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 8px 20px; text-align: center; font-size: 10px; color: #999; }
+.problem { background: #f5f5f5; padding: 36px 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center; }
+.slabel { font-size: 9px; font-weight: 700; color: #EB2033; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 7px; }
+.sh2 { font-size: 19px; font-weight: 700; color: #111; line-height: 1.3; margin-bottom: 10px; }
+.sbody { font-size: 11px; color: #555; line-height: 1.7; }
+.sbox { border-radius: 10px; padding: 16px; text-align: center; }
+.sbox.maroon { background: #AF0E20; color: #fff; }
+.sbox.green { background: #2AB573; color: #fff; margin-top: 8px; }
+.snum { font-size: 26px; font-weight: 700; }
+.slbl2 { font-size: 10px; opacity: 0.85; margin-top: 3px; }
+.scite { font-size: 9px; opacity: 0.6; margin-top: 3px; }
+.study { background: #fff; padding: 36px 20px; }
+.study-hd { text-align: center; margin-bottom: 22px; }
+.study-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.sc { border: 1.5px solid #EB2033; border-radius: 10px; padding: 14px 8px; text-align: center; }
+.sc-num { font-size: 22px; font-weight: 700; color: #EB2033; }
+.sc-lbl { font-size: 10px; font-weight: 600; color: #111; margin-top: 3px; }
+.sc-sub { font-size: 9px; color: #888; margin-top: 2px; }
+.results { background: #770004; padding: 36px 20px; }
+.rh { text-align: center; margin-bottom: 18px; }
+.explainer-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
+.exp-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 12px; }
+.exp-term { font-size: 9px; font-weight: 700; color: #FFDD17; letter-spacing: 0.5px; margin-bottom: 5px; }
+.exp-def { font-size: 10px; color: rgba(255,255,255,0.7); line-height: 1.55; }
+.rgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+.rcard { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 12px; display: flex; flex-direction: column; gap: 8px; }
+.rfinding { font-size: 10px; color: #fff; font-style: italic; line-height: 1.4; border-left: 2px solid #FFDD17; padding-left: 8px; }
+.rscores { display: flex; align-items: baseline; gap: 5px; }
+.rs-before { font-size: 18px; font-weight: 700; color: rgba(255,255,255,0.4); }
+.rs-arrow { font-size: 12px; color: rgba(255,255,255,0.3); }
+.rs-after { font-size: 22px; font-weight: 700; color: #FFDD17; }
+.rs-scale { font-size: 9px; color: rgba(255,255,255,0.35); }
+.rdiv { border: none; border-top: 1px solid rgba(255,255,255,0.1); }
+.rplain { font-size: 10px; color: rgba(255,255,255,0.82); line-height: 1.55; }
+.rplain strong { color: #fff; }
+.conf-row { display: flex; align-items: center; gap: 6px; }
+.conf-bar { flex: 1; height: 3px; background: rgba(255,255,255,0.12); border-radius: 2px; overflow: hidden; }
+.conf-fill { height: 100%; background: #FFDD17; border-radius: 2px; }
+.conf-lbl { font-size: 9px; color: rgba(255,255,255,0.45); white-space: nowrap; }
+.rbadge { display: inline-block; background: #FFDD17; color: #000; font-size: 8px; font-weight: 700; padding: 3px 9px; border-radius: 20px; }
+.rcallout { background: rgba(255,221,23,0.09); border-left: 3px solid #FFDD17; border-radius: 6px; padding: 13px 14px; }
+.rc-text { font-size: 11px; color: rgba(255,255,255,0.88); line-height: 1.65; font-style: italic; margin-bottom: 7px; }
+.rc-attr { font-size: 10px; color: #FFDD17; font-weight: 600; }
+.process { background: #fff; padding: 36px 20px; }
+.steps { display: flex; gap: 0; margin-top: 22px; }
+.step { flex: 1; text-align: center; padding: 0 4px; position: relative; }
+.step-num { width: 26px; height: 26px; background: #EB2033; color: #fff; border-radius: 50%; font-weight: 700; font-size: 11px; display: flex; align-items: center; justify-content: center; margin: 0 auto 7px; position: relative; z-index: 1; }
+.step-line { position: absolute; top: 13px; left: 50%; right: -50%; height: 2px; background: #FFDD17; z-index: 0; }
+.step:last-child .step-line { display: none; }
+.step-title { font-size: 10px; font-weight: 700; color: #111; margin-bottom: 3px; }
+.step-body { font-size: 9px; color: #777; line-height: 1.5; }
+.quote-sec { background: #AF0E20; padding: 36px 24px; text-align: center; }
+.qmark { font-size: 56px; line-height: 0.75; color: #FFDD17; margin-bottom: 12px; display: block; font-family: Georgia, serif; }
+.qtext { font-size: 13px; color: #fff; font-style: italic; line-height: 1.75; max-width: 540px; margin: 0 auto 14px; }
+.qattr { font-size: 10px; color: #FFDD17; font-weight: 600; }
+.qpub { font-size: 9px; color: rgba(255,255,255,0.6); margin-top: 3px; }
+.who { background: #f5f5f5; padding: 36px 20px; }
+.who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; }
+.wcard { background: #fff; border-radius: 10px; padding: 16px 14px; border: 0.5px solid #e0e0e0; }
+.wicon { font-size: 18px; margin-bottom: 7px; }
+.wtitle { font-size: 12px; font-weight: 700; color: #111; margin-bottom: 5px; }
+.wbody { font-size: 10px; color: #666; line-height: 1.6; margin-bottom: 9px; }
+.wlink { font-size: 10px; color: #EB2033; font-weight: 600; }
+.cta { background: #EB2033; padding: 40px 24px; text-align: center; }
+.cta-h { font-size: 22px; font-weight: 700; color: #fff; line-height: 1.3; max-width: 440px; margin: 0 auto 10px; }
+.cta-sub { font-size: 12px; color: rgba(255,255,255,0.82); max-width: 380px; margin: 0 auto 20px; line-height: 1.6; }
+.cta-cite { font-size: 9px; color: rgba(255,255,255,0.45); max-width: 480px; margin: 16px auto 0; line-height: 1.6; }
+.footer { background: #000; padding: 18px 24px; text-align: center; }
+.flogo { color: #fff; font-weight: 700; font-size: 13px; margin-bottom: 3px; }
+.ftag { color: #666; font-size: 10px; margin-bottom: 8px; }
+.flinks { display: flex; gap: 14px; justify-content: center; font-size: 10px; color: #666; margin-bottom: 6px; flex-wrap: wrap; }
+.fcopy { font-size: 9px; color: #444; }
+</style>
+
+<div class="lp">
+
+  <nav class="nav">
+    <div class="nav-logo">Makey Makey</div>
+    <div class="nav-links"><span>Research</span><span>For Educators</span><span>Shop</span></div>
+    <button class="nav-btn">Shop Now</button>
+  </nav>
+
+  <div class="hero">
+    <div class="eyebrow">Peer-Reviewed Research · Published 2025</div>
+    <h1 class="hero-h1">When Girls Invent,<br>They Believe They Can.</h1>
+    <p class="hero-sub">A landmark 3-year study found that hands-on making with Makey Makey produces significantly stronger gains in STEM confidence for girls — at exactly the age it matters most.</p>
+    <div class="btns">
+      <button class="btn-y" onclick="openLink('https://makeymakey.com/products/makey-makey-kit')">Shop Makey Makey</button>
+      <button class="btn-w" onclick="openLink('https://makeymakey.com/pages/research')">Read the Research</button>
+    </div>
+  </div>
+
+  <div class="cred">📄 Santos et al. (2025) · International Journal of Technology and Design Education · Springer Nature · DOI: 10.1007/s10798-025-10001-6 · Open Access</div>
+
+  <div class="problem">
+    <div>
+      <div class="slabel">The Challenge</div>
+      <h2 class="sh2">Girls lose interest in STEM before high school — and we can change that early.</h2>
+      <p class="sbody">Research consistently shows that gender disparities in STEM begin in childhood. By the time girls reach secondary school, many have already formed limiting beliefs about their abilities in science and technology.<br><br>The good news: early, hands-on intervention works. When girls ages 9–12 are positioned as inventors and engineers, their self-belief transforms. This is the window. Makey Makey opens it.</p>
+    </div>
+    <div>
+      <div class="sbox maroon">
+        <div class="snum">Only 28%</div>
+        <div class="slbl2">of STEM professionals worldwide are women</div>
+        <div class="scite">Morais Maceira, 2017</div>
+      </div>
+      <div class="sbox green">
+        <div class="snum">Ages 9–12</div>
+        <div class="slbl2">the critical window when STEM identity forms</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="study">
+    <div class="study-hd">
+      <div class="slabel" style="text-align:center">The Research</div>
+      <h2 class="sh2" style="text-align:center">A 3-year peer-reviewed study. Real schools. Real results.</h2>
+      <p class="sbody" style="text-align:center;max-width:500px;margin:8px auto 0">Researchers at Universitat Pompeu Fabra in Barcelona embedded Makey Makey into a Design Thinking project-based learning program across 12 public primary schools, measuring self-efficacy and motivation before and after — across 318 students over three years.</p>
+    </div>
+    <div class="study-grid">
+      <div class="sc"><div class="sc-num">318</div><div class="sc-lbl">students</div><div class="sc-sub">grades 4–6, ages 9–12</div></div>
+      <div class="sc"><div class="sc-num">12</div><div class="sc-lbl">public schools</div><div class="sc-sub">Barcelona, Spain</div></div>
+      <div class="sc"><div class="sc-num">3</div><div class="sc-lbl">years of data</div><div class="sc-sub">2021 · 2022 · 2023</div></div>
+      <div class="sc"><div class="sc-num">173</div><div class="sc-lbl">girl participants</div><div class="sc-sub">tracked individually</div></div>
+    </div>
+  </div>
+
+  <div class="results">
+    <div class="rh">
+      <div class="slabel" style="color:#FFDD17">Key Findings — Girl Students</div>
+      <h2 class="sh2" style="color:#fff;font-size:20px">Girls didn't just improve. They outperformed every expectation.</h2>
+      <p class="sbody" style="color:rgba(255,255,255,0.7);text-align:center;max-width:460px;margin:6px auto 0">Compared to boys, girls showed larger improvements across more measures. Here's what the numbers actually mean.</p>
+    </div>
+
+    <div class="explainer-row">
+      <div class="exp-card">
+        <div class="exp-term">What is "effect size"?</div>
+        <div class="exp-def">A measure of how meaningful the change was — not just whether it happened. Researchers consider 0.30+ to be educationally significant. These results hit 0.41.</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-term">What does p &lt; 0.001 mean?</div>
+        <div class="exp-def">Less than a 1-in-1,000 chance the result is a coincidence. The scientific gold standard is p &lt; 0.05. These results far exceed it — we can be 99.9% confident.</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-term">What is the 1–5 scale?</div>
+        <div class="exp-def">Students rated agreement: 1 = Not at all, 3 = Neither yes nor no, 5 = Definitely yes. The before → after scores show real shifts in how girls see themselves.</div>
+      </div>
+    </div>
+
+    <div class="rgrid">
+      <div class="rcard">
+        <div class="rfinding">"I can design a technological invention"</div>
+        <div class="rscores">
+          <span class="rs-before">2.65</span>
+          <span class="rs-arrow">→</span>
+          <span class="rs-after">3.18</span>
+          <span class="rs-scale">out of 5</span>
+        </div>
+        <hr class="rdiv">
+        <div class="rplain">Girls moved from <strong>"I'm not sure I can"</strong> to <strong>"I think I can"</strong> — a meaningful confidence shift in engineering identity.</div>
+        <div class="conf-row">
+          <div class="conf-bar"><div class="conf-fill" style="width:99.9%"></div></div>
+          <div class="conf-lbl">99.9% confident</div>
+        </div>
+        <div><span class="rbadge">Largest gain in the study</span></div>
+      </div>
+      <div class="rcard">
+        <div class="rfinding">"I look up science topics on my own"</div>
+        <div class="rscores">
+          <span class="rs-before">2.53</span>
+          <span class="rs-arrow">→</span>
+          <span class="rs-after">3.21</span>
+          <span class="rs-scale">out of 5</span>
+        </div>
+        <hr class="rdiv">
+        <div class="rplain">Girls went from <strong>rarely seeking science info</strong> to <strong>actively doing so</strong> — the hallmark of a student who sees themselves as a scientist.</div>
+        <div class="conf-row">
+          <div class="conf-bar"><div class="conf-fill" style="width:99.9%"></div></div>
+          <div class="conf-lbl">99.9% confident</div>
+        </div>
+      </div>
+      <div class="rcard">
+        <div class="rfinding">"I think I am good at technology"</div>
+        <div class="rscores">
+          <span class="rs-before">3.17</span>
+          <span class="rs-arrow">→</span>
+          <span class="rs-after">3.49</span>
+          <span class="rs-scale">out of 5</span>
+        </div>
+        <hr class="rdiv">
+        <div class="rplain">Girls with <strong>moderate tech confidence</strong> came out with <strong>strong tech confidence</strong> — a gain significantly larger than boys' in the same program.</div>
+        <div class="conf-row">
+          <div class="conf-bar"><div class="conf-fill" style="width:99.9%"></div></div>
+          <div class="conf-lbl">99.9% confident</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rcallout">
+      <div class="rc-text">"The 'Makers a les Aules' sessions had a more positive overall impact on girl students. This is evident not only because girls showed significant improvements on a greater number of items, but also because the magnitude of those improvements was larger compared to boys."</div>
+      <div class="rc-attr">— Santos et al. (2025), International Journal of Technology and Design Education</div>
+    </div>
+  </div>
+
+  <div class="process">
+    <div style="text-align:center">
+      <div class="slabel">The Program</div>
+      <h2 class="sh2">Five sessions. Real invention. Real confidence.</h2>
+      <p class="sbody" style="max-width:460px;margin:7px auto 0">Students work through a Design Thinking journey — empathizing with a real problem, ideating, and building an interactive prototype with Makey Makey and Scratch. No prior experience needed.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1<div class="step-line"></div></div>
+        <div class="step-title">Empathize &amp; Define</div>
+        <div class="step-body">Explore a real-world problem and define what to solve</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2<div class="step-line"></div></div>
+        <div class="step-title">Ideate</div>
+        <div class="step-body">Brainstorm solutions with sticky notes and group discussion</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3<div class="step-line"></div></div>
+        <div class="step-title">Prototype</div>
+        <div class="step-body">Sketch and plan the invention's features and design</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4<div class="step-line"></div></div>
+        <div class="step-title">Build &amp; Test</div>
+        <div class="step-body">Use Makey Makey + Scratch to bring the prototype to life</div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-title">Demo</div>
+        <div class="step-body">Present inventions to peers and reflect on the process</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-sec">
+    <span class="qmark">"</span>
+    <p class="qtext">"Notably, girls showed marked improvements in self-efficacy following the intervention, suggesting that the design of the activities in the 'Makers a les Aules' may help counteract early gender disparities in STEM. These findings reinforce the importance of implementing inclusive, learner-centered pedagogies at a stage when students are forming foundational beliefs about their abilities and interests in STEM."</p>
+    <div class="qattr">— Patricia Santos, Khadija El Aadmi, Miriam Calvera-Isabal &amp; Amaia Rodríguez</div>
+    <div class="qpub">International Journal of Technology and Design Education, Springer Nature, 2025</div>
+  </div>
+
+  <div class="who">
+    <div style="text-align:center">
+      <div class="slabel">Built for Educators</div>
+      <h2 class="sh2">Designed for classrooms. Proven in schools.</h2>
+    </div>
+    <div class="who-grid">
+      <div class="wcard">
+        <div class="wicon" aria-hidden="true">👩‍🏫</div>
+        <div class="wtitle">K-12 Teachers</div>
+        <div class="wbody">No coding background required. Works with any conductive material. Your students do the inventing.</div>
+        <div class="wlink">See classroom resources →</div>
+      </div>
+      <div class="wcard">
+        <div class="wicon" aria-hidden="true">🏫</div>
+        <div class="wtitle">Administrators</div>
+        <div class="wbody">Peer-reviewed evidence for your gender equity goals, grant applications, and curriculum investment decisions.</div>
+        <div class="wlink" onclick="openLink('https://makeymakey.com/pages/research')" style="cursor:pointer">Download the study →</div>
+      </div>
+      <div class="wcard">
+        <div class="wicon" aria-hidden="true">📋</div>
+        <div class="wtitle">District Buyers</div>
+        <div class="wbody">Reusable, durable kits that scale from one classroom to district-wide STEM programs. Curriculum-agnostic.</div>
+        <div class="wlink">Request a quote →</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <h2 class="cta-h">"Give every girl in your classroom a reason to say: I'm an inventor."</h2>
+    <p class="cta-sub">Join thousands of educators using Makey Makey to close the STEM gender gap — one invention at a time.</p>
+    <div class="btns">
+      <button class="btn-y" onclick="openLink('https://makeymakey.com/products/makey-makey-kit')">Shop Makey Makey</button>
+      <button class="btn-w" onclick="openLink('https://makeymakey.com/pages/research')">Read the Full Study</button>
+    </div>
+    <p class="cta-cite">Santos, P., El Aadmi, K., Calvera-Isabal, M., &amp; Rodríguez, A. (2025). Fostering students' motivation and self-efficacy in science, technology, engineering, and design through design thinking and making in project-based learning: a gender-perspective study in primary education. International Journal of Technology and Design Education, 35, 1293–1319. https://doi.org/10.1007/s10798-025-10001-6</p>
+  </div>
+
+  <div class="footer">
+    <div class="flogo">Makey Makey</div>
+    <div class="ftag">An Invention Kit for Everyone</div>
+    <div class="flinks"><span>Shop</span><span>Research</span><span>Educators</span><span>About</span><span>Contact</span></div>
+    <div class="fcopy">© 2025 JoyLabz LLC. All rights reserved.</div>
+  </div>
+
+</div>
