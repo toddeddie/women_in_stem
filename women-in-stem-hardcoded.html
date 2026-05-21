@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Makey Makey | The Research-Backed Tool Closing the STEM Gender Gap</title>
+  <meta name="description" content="A peer-reviewed 3-year study found Makey Makey produces significantly stronger STEM confidence gains for girls than boys. See the evidence and bring it to your classroom." />
+  <meta property="og:title" content="Makey Makey | The Research-Backed Tool Closing the STEM Gender Gap" />
+  <meta property="og:description" content="A peer-reviewed 3-year study found Makey Makey produces significantly stronger STEM confidence gains for girls than boys." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif; color: #1a1a1a; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; }
+
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .section-label { display: block; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 14px; }
+    .label-red    { color: #EB2033; }
+    .label-yellow { color: #FFDD17; }
+
+    .pill-btn { display: inline-block; padding: 16px 36px; border-radius: 100px; font-size: 17px; font-weight: 700; cursor: pointer; border: 2px solid transparent; transition: filter .18s ease, transform .15s ease; font-family: inherit; }
+    .pill-btn:hover { filter: brightness(.9); transform: translateY(-1px); }
+    .btn-yellow  { background: #FFDD17; color: #000; }
+    .btn-outline { background: transparent; color: #fff; border-color: #fff; }
+    .btn-outline:hover { background: rgba(255,255,255,.12); filter: none; }
+
+    .fade-in { opacity: 0; transform: translateY(22px); transition: opacity .55s ease, transform .55s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Tooltip system ──────────────────────────────────────────── */
+    .tip-wrap { position: relative; display: inline-flex; align-items: center; gap: 5px; }
+    .tip-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: rgba(255,255,255,.22); border: 1px solid rgba(255,255,255,.4);
+      color: #fff; font-size: 11px; font-weight: 700; cursor: pointer;
+      font-family: inherit; flex-shrink: 0; line-height: 1;
+      transition: background .15s;
+      vertical-align: middle;
+    }
+    .tip-btn:hover { background: rgba(255,255,255,.38); }
+    .tip-btn[aria-expanded="true"] { background: #FFDD17; color: #000; border-color: #FFDD17; }
+
+    .tip-popup {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 260px;
+      background: #111;
+      color: #f0f0f0;
+      font-size: 13px;
+      line-height: 1.65;
+      padding: 14px 16px;
+      border-radius: 10px;
+      box-shadow: 0 8px 28px rgba(0,0,0,.45);
+      z-index: 300;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateX(-50%) translateY(4px);
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    .tip-popup::after {
+      content: '';
+      position: absolute;
+      top: 100%; left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: #111;
+    }
+    .tip-popup.tip-visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    /* Keep popup on screen near edges */
+    .tip-wrap.tip-left .tip-popup  { left: 0; transform: translateX(0); }
+    .tip-wrap.tip-left .tip-popup::after { left: 14px; transform: none; }
+    .tip-wrap.tip-right .tip-popup { left: auto; right: 0; transform: translateX(0); }
+    .tip-wrap.tip-right .tip-popup::after { left: auto; right: 14px; transform: none; }
+
+    .tip-popup strong { color: #FFDD17; display: block; margin-bottom: 4px; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+
+    /* ══ NAV ══ */
+    .site-nav { position: sticky; top: 0; z-index: 200; background: #fff; border-bottom: 1px solid #e8e8e8; padding: 0 24px; }
+    .nav-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 20px; }
+    .nav-logo { font-size: 22px; font-weight: 700; color: #EB2033; white-space: nowrap; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 15px; font-weight: 500; color: #333; transition: color .15s; }
+    .nav-links a:hover { color: #EB2033; }
+    .nav-cta { background: #EB2033; color: #fff; padding: 10px 22px; border-radius: 100px; font-size: 14px; font-weight: 700; white-space: nowrap; transition: filter .18s; }
+    .nav-cta:hover { filter: brightness(.88); }
+    @media (max-width: 640px) { .nav-links { display: none; } }
+
+    /* ══ HERO ══ */
+    .hero { background: #770004; min-height: 88vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 24px 60px; }
+    .hero-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: #FFDD17; margin-bottom: 22px; }
+    .hero h1 { font-size: clamp(38px, 6vw, 68px); font-weight: 700; color: #fff; line-height: 1.1; max-width: 800px; margin: 0 auto 26px; }
+    .hero-sub { font-size: clamp(17px, 2.2vw, 20px); color: rgba(255,255,255,.86); max-width: 640px; margin: 0 auto 44px; line-height: 1.7; }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-bottom: 64px; }
+    .hero-divider { width: 120px; height: 3px; background: #FFDD17; border-radius: 2px; margin: 0 auto 20px; }
+    .hero-chevron { color: rgba(255,255,255,.5); font-size: 30px; animation: bounce 2s infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+
+    /* ══ CREDENTIAL ══ */
+    .credential { background: #fff; border-bottom: 1px solid #eee; padding: 14px 24px; text-align: center; }
+    .credential p { font-size: 13px; color: #6C6E70; line-height: 1.5; }
+    .credential a { color: #6C6E70; text-decoration: underline; }
+
+    /* ══ PROBLEM ══ */
+    .problem { background: #F5F5F5; padding: 88px 24px; }
+    .problem-inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .problem h2 { font-size: clamp(24px, 3.5vw, 36px); font-weight: 700; line-height: 1.2; margin-bottom: 20px; color: #111; }
+    .problem-body { font-size: 16px; color: #555; line-height: 1.8; }
+    .problem-body p + p { margin-top: 16px; }
+    .stat-cards { display: flex; flex-direction: column; gap: 16px; }
+    .stat-card { border-radius: 18px; padding: 32px 28px; text-align: center; color: #fff; }
+    .stat-card-maroon { background: #AF0E20; }
+    .stat-card-green  { background: #2AB573; }
+    .stat-card-icon { font-size: 44px; margin-bottom: 12px; }
+    .stat-card-sub  { font-size: 17px; line-height: 1.55; margin-bottom: 8px; }
+    .stat-card-note { font-size: 12px; opacity: .72; }
+    @media (max-width: 768px) { .problem-inner { grid-template-columns: 1fr; } }
+
+    /* ══ STUDY ══ */
+    .study { background: #fff; padding: 88px 24px; text-align: center; }
+    .study h2 { font-size: clamp(22px, 3vw, 32px); font-weight: 700; margin-bottom: 16px; color: #111; }
+    .study-body { font-size: 16px; color: #555; max-width: 640px; margin: 0 auto 52px; line-height: 1.8; }
+    .study-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
+    .study-card { border: 2px solid #EB2033; border-radius: 16px; padding: 28px 16px; }
+    .study-num { font-size: clamp(36px, 5vw, 54px); font-weight: 700; color: #EB2033; display: block; line-height: 1; margin-bottom: 8px; }
+    .study-label { font-size: 15px; font-weight: 600; color: #111; display: block; margin-bottom: 4px; }
+    .study-sub   { font-size: 13px; color: #888; display: block; }
+    @media (max-width: 640px) { .study-grid { grid-template-columns: repeat(2,1fr); } }
+
+    /* ══ RESULTS ══ */
+    .results { background: #770004; padding: 88px 24px; color: #fff; }
+    .results-header { text-align: center; margin-bottom: 52px; }
+    .results-header h2 { font-size: clamp(24px,4vw,40px); font-weight: 700; color: #fff; max-width: 720px; margin: 0 auto 18px; line-height: 1.15; }
+    .results-header p { font-size: 18px; color: rgba(255,255,255,.8); max-width: 580px; margin: 0 auto; line-height: 1.65; }
+
+    .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1000px; margin: 0 auto 44px; }
+    .result-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 16px; padding: 28px 22px; }
+
+    /* Statement */
+    .result-statement { font-size: 15px; font-style: italic; color: rgba(255,255,255,.9); border-left: 3px solid #FFDD17; padding-left: 14px; margin-bottom: 20px; line-height: 1.6; }
+
+    /* Scores row with tooltip trigger */
+    .result-scores { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
+    .score-before { font-size: 28px; font-weight: 700; color: rgba(255,255,255,.4); }
+    .score-arrow  { font-size: 18px; color: rgba(255,255,255,.5); }
+    .score-after  { font-size: 38px; font-weight: 700; color: #FFDD17; }
+    .score-scale-wrap { display: flex; align-items: center; gap: 5px; align-self: flex-end; padding-bottom: 5px; }
+    .score-scale { font-size: 13px; color: rgba(255,255,255,.5); }
+
+    /* Effect size row */
+    .effect-size-row { display: flex; align-items: center; gap: 6px; margin-bottom: 16px; }
+    .effect-size-label { font-size: 12px; color: rgba(255,255,255,.55); }
+    .effect-size-val   { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.75); }
+
+    .result-plain { font-size: 14px; color: rgba(255,255,255,.78); line-height: 1.7; margin-bottom: 18px; }
+
+    /* Confidence row with tooltip trigger */
+    .confidence-wrap { margin-bottom: 16px; }
+    .confidence-label-row { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
+    .confidence-label { font-size: 12px; color: rgba(255,255,255,.55); }
+    .confidence-track { background: rgba(255,255,255,.15); border-radius: 100px; height: 6px; overflow: hidden; }
+    .confidence-fill  { height: 100%; background: #FFDD17; border-radius: 100px; width: 99%; }
+
+    .result-badge { display: inline-block; background: #FFDD17; color: #000; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 100px; letter-spacing: .04em; }
+
+    .paper-quote { max-width: 840px; margin: 0 auto; border-left: 4px solid #FFDD17; border-radius: 0 12px 12px 0; background: rgba(255,255,255,.06); padding: 26px 30px; }
+    .paper-quote p { font-size: 16px; color: rgba(255,255,255,.88); font-style: italic; line-height: 1.75; margin-bottom: 14px; }
+    .paper-quote cite { font-size: 13px; color: rgba(255,255,255,.5); font-style: normal; }
+
+    @media (max-width: 768px) { .results-grid { grid-template-columns: 1fr; } }
+
+    /* ══ PROCESS ══ */
+    .process { background: #fff; padding: 88px 24px; text-align: center; }
+    .process h2 { font-size: clamp(22px,3vw,32px); font-weight: 700; margin-bottom: 16px; color: #111; }
+    .process-body { font-size: 16px; color: #555; max-width: 560px; margin: 0 auto 60px; line-height: 1.8; }
+    .steps { display: flex; max-width: 1000px; margin: 0 auto; position: relative; }
+    .steps::before { content:''; position:absolute; top:27px; left:calc(10% + 27px); right:calc(10% + 27px); height:3px; background:#FFDD17; z-index:0; }
+    .step { flex:1; display:flex; flex-direction:column; align-items:center; text-align:center; padding:0 8px; position:relative; z-index:1; }
+    .step-num { width:56px; height:56px; border-radius:50%; background:#EB2033; color:#fff; font-size:20px; font-weight:700; display:flex; align-items:center; justify-content:center; margin-bottom:16px; flex-shrink:0; }
+    .step-title { font-size:15px; font-weight:700; color:#111; margin-bottom:8px; }
+    .step-desc  { font-size:13px; color:#666; line-height:1.65; }
+    @media (max-width: 640px) { .steps { flex-direction:column; gap:28px; } .steps::before { display:none; } }
+
+    /* ══ QUOTE SECTION ══ */
+    .quote-section { background: #AF0E20; padding: 88px 24px; text-align: center; }
+    .quote-mark { font-family: Georgia, serif; font-size: 120px; line-height: .5; color: #FFDD17; display: block; margin-bottom: 28px; opacity: .85; }
+    .quote-section blockquote { font-size: clamp(16px,2.2vw,22px); font-style: italic; color: #fff; max-width: 740px; margin: 0 auto 36px; line-height: 1.75; }
+    .quote-attribution { color: #FFDD17; font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .quote-pub { font-size: 14px; color: rgba(255,255,255,.62); }
+
+    /* ══ FOR SECTION ══ */
+    .for-section { background: #F5F5F5; padding: 88px 24px; text-align: center; }
+    .for-section h2 { font-size: clamp(22px,3vw,32px); font-weight: 700; margin-bottom: 52px; color: #111; }
+    .for-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
+    .for-card { background: #fff; border-radius: 20px; padding: 36px 28px; text-align: left; box-shadow: 0 2px 18px rgba(0,0,0,.07); }
+    .for-icon { font-size: 44px; margin-bottom: 18px; display: block; }
+    .for-card h3 { font-size: 20px; font-weight: 700; color: #111; margin-bottom: 12px; }
+    .for-card p  { font-size: 15px; color: #555; line-height: 1.75; margin-bottom: 20px; }
+    .for-card a  { font-size: 15px; font-weight: 600; color: #EB2033; }
+    .for-card a:hover { text-decoration: underline; }
+    @media (max-width: 768px) { .for-grid { grid-template-columns: 1fr; } }
+
+    /* ══ FINAL CTA ══ */
+    .cta-final { background: #EB2033; padding: 104px 24px; text-align: center; }
+    .cta-final h2 { font-size: clamp(26px,4.5vw,48px); font-weight: 700; color: #fff; max-width: 720px; margin: 0 auto 20px; line-height: 1.15; }
+    .cta-sub { font-size: 18px; color: rgba(255,255,255,.88); max-width: 540px; margin: 0 auto 44px; line-height: 1.7; }
+    .cta-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-bottom: 36px; }
+    .citation { font-size: 11px; color: rgba(255,255,255,.48); max-width: 720px; margin: 0 auto; line-height: 1.75; }
+    .citation a { color: rgba(255,255,255,.52); text-decoration: underline; }
+
+    /* ══ FOOTER ══ */
+    .site-footer { background: #000; padding: 56px 24px 36px; color: #fff; text-align: center; }
+    .footer-inner { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    .footer-logo { font-size: 22px; font-weight: 700; color: #fff; }
+    .footer-tag  { font-size: 14px; color: #6C6E70; }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; list-style: none; }
+    .footer-links a { font-size: 14px; color: #aaa; }
+    .footer-links a:hover { color: #fff; }
+    .footer-social { display: flex; gap: 20px; font-size: 22px; }
+    .footer-copy { font-size: 13px; color: #555; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="https://makeymakey.com" class="nav-logo">Makey Makey</a>
+    <ul class="nav-links">
+      <li><a href="https://makeymakey.com/pages/research">Research</a></li>
+      <li><a href="https://makeymakey.com/pages/educators">For Educators</a></li>
+      <li><a href="https://makeymakey.com/collections/all">Shop</a></li>
+    </ul>
+    <a href="https://makeymakey.com/products/makey-makey-kit" class="nav-cta">Shop Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="hero-headline">
+  <p class="hero-eyebrow">Peer-Reviewed Research · Published 2025</p>
+  <h1 id="hero-headline">When Girls Invent,<br>They Believe They Can.</h1>
+  <p class="hero-sub">A landmark 3-year study found that hands-on making with Makey Makey produces significantly stronger gains in STEM confidence for girls than boys — at exactly the age it matters most.</p>
+  <div class="hero-btns">
+    <a href="https://makeymakey.com/products/makey-makey-kit" class="pill-btn btn-yellow">Shop Makey Makey</a>
+    <a href="https://makeymakey.com/pages/research" class="pill-btn btn-outline" target="_blank" rel="noopener">Read the Research</a>
+  </div>
+  <div class="hero-divider" aria-hidden="true"></div>
+  <div class="hero-chevron" aria-hidden="true">⌄</div>
+</section>
+
+<!-- CREDENTIAL BANNER -->
+<div class="credential" role="note">
+  <p>📄 Santos et al. (2025) · International Journal of Technology and Design Education · Springer Nature ·
+    <a href="https://doi.org/10.1007/s10798-025-10001-6" target="_blank" rel="noopener">DOI: 10.1007/s10798-025-10001-6</a>
+    · Open Access
+  </p>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem" aria-labelledby="problem-headline">
+  <div class="problem-inner">
+    <div class="fade-in">
+      <span class="section-label label-red">The Challenge</span>
+      <h2 id="problem-headline">Girls lose interest in STEM before high school — and we can change that early.</h2>
+      <div class="problem-body">
+        <p>Research consistently shows that gender disparities in STEM begin in childhood. By the time girls reach secondary school, many have already formed limiting beliefs about their abilities in science and technology.</p>
+        <p>The good news: early, hands-on intervention works. When girls ages 9–12 are positioned as inventors and engineers, their self-belief transforms. This is the window. Makey Makey opens it.</p>
+      </div>
+    </div>
+    <div class="stat-cards fade-in">
+      <div class="stat-card stat-card-maroon">
+        <div class="stat-card-icon" aria-hidden="true">👩‍🔬</div>
+        <p class="stat-card-sub">Significantly fewer women than men pursue careers in Science, Technology, and Engineering</p>
+        <p class="stat-card-note">Morais Maceira, 2017 · cited in Santos et al., 2025</p>
+      </div>
+      <div class="stat-card stat-card-green">
+        <p style="font-size:52px;font-weight:700;color:#fff;line-height:1;margin-bottom:10px;">Ages 9–12</p>
+        <p class="stat-card-sub">The critical window when STEM identity forms</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STUDY AT A GLANCE -->
+<section class="study" aria-labelledby="study-headline">
+  <div class="container">
+    <span class="section-label label-red">The Research</span>
+    <h2 id="study-headline">A 3-year peer-reviewed study. Real schools. Real results.</h2>
+    <p class="study-body">Researchers at Universitat Pompeu Fabra in Barcelona embedded Makey Makey into a Design Thinking project-based learning program across 12 public primary schools. They measured self-efficacy and motivation in Science, Technology, and Design — before and after — across 318 students over three years.</p>
+    <div class="study-grid">
+      <div class="study-card fade-in">
+        <span class="study-num count-up" data-target="318">0</span>
+        <span class="study-label">students participated</span>
+        <span class="study-sub">grades 4–6, ages 9–12</span>
+      </div>
+      <div class="study-card fade-in">
+        <span class="study-num count-up" data-target="12">0</span>
+        <span class="study-label">public schools</span>
+        <span class="study-sub">Barcelona, Spain</span>
+      </div>
+      <div class="study-card fade-in">
+        <span class="study-num count-up" data-target="3">0</span>
+        <span class="study-label">years of data</span>
+        <span class="study-sub">2021 · 2022 · 2023</span>
+      </div>
+      <div class="study-card fade-in">
+        <span class="study-num count-up" data-target="173">0</span>
+        <span class="study-label">girl participants</span>
+        <span class="study-sub">tracked individually by gender</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY RESULTS -->
+<section class="results" aria-labelledby="results-headline">
+  <div class="container">
+    <div class="results-header fade-in">
+      <span class="section-label label-yellow">Key Findings — Girl Students</span>
+      <h2 id="results-headline">Girls didn't just improve. They outperformed every expectation.</h2>
+      <p>Compared to boys, girls showed larger improvements across more measures.</p>
+    </div>
+
+    <div class="results-grid">
+
+      <!-- Card 1 -->
+      <div class="result-card fade-in">
+        <p class="result-statement">"I can design a technological invention"</p>
+
+        <div class="result-scores">
+          <span class="score-before">2.65</span>
+          <span class="score-arrow">→</span>
+          <span class="score-after">3.18</span>
+          <span class="score-scale-wrap">
+            <span class="score-scale">out of 5</span>
+            <span class="tip-wrap" data-tip="scale">
+              <button class="tip-btn" aria-label="What is the 1–5 scale?" aria-expanded="false">i</button>
+              <span class="tip-popup" role="tooltip">
+                <strong>What is the 1–5 scale?</strong>
+                Students rated agreement from 1 (Not at all) to 5 (Definitely yes). These scores show real shifts in how girls see themselves as scientists and inventors.
+              </span>
+            </span>
+          </span>
+        </div>
+
+        <div class="effect-size-row">
+          <span class="effect-size-label">Effect size:</span>
+          <span class="effect-size-val">r = 0.408</span>
+          <span class="tip-wrap" data-tip="effect">
+            <button class="tip-btn" aria-label="What is effect size?" aria-expanded="false">i</button>
+            <span class="tip-popup" role="tooltip">
+              <strong>What is effect size?</strong>
+              A measure of how meaningful the change was — not just whether it happened. Researchers consider r = 0.30+ to be educationally significant. This result hits 0.408.
+            </span>
+          </span>
+        </div>
+
+        <p class="result-plain">Girls moved from "I'm not sure I can" to "I think I can" — a meaningful confidence shift in engineering identity.</p>
+
+        <div class="confidence-wrap">
+          <div class="confidence-label-row">
+            <span class="confidence-label">Statistical confidence: 99.9%</span>
+            <span class="tip-wrap" data-tip="pval">
+              <button class="tip-btn" aria-label="What does statistical confidence mean?" aria-expanded="false">i</button>
+              <span class="tip-popup" role="tooltip">
+                <strong>What does p &lt; 0.001 mean?</strong>
+                Less than a 1-in-1,000 chance the result is a coincidence. The scientific gold standard is p &lt; 0.05. These results far exceed it — 99.9% confident this is real.
+              </span>
+            </span>
+          </div>
+          <div class="confidence-track"><div class="confidence-fill"></div></div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="result-card fade-in">
+        <p class="result-statement">"I have asked for or sought information about science before"</p>
+
+        <div class="result-scores">
+          <span class="score-before">2.53</span>
+          <span class="score-arrow">→</span>
+          <span class="score-after">3.21</span>
+          <span class="score-scale-wrap">
+            <span class="score-scale">out of 5</span>
+            <span class="tip-wrap" data-tip="scale">
+              <button class="tip-btn" aria-label="What is the 1–5 scale?" aria-expanded="false">i</button>
+              <span class="tip-popup" role="tooltip">
+                <strong>What is the 1–5 scale?</strong>
+                Students rated agreement from 1 (Not at all) to 5 (Definitely yes). These scores show real shifts in how girls see themselves as scientists and inventors.
+              </span>
+            </span>
+          </span>
+        </div>
+
+        <div class="effect-size-row">
+          <span class="effect-size-label">Effect size:</span>
+          <span class="effect-size-val">r = 0.415</span>
+          <span class="tip-wrap" data-tip="effect">
+            <button class="tip-btn" aria-label="What is effect size?" aria-expanded="false">i</button>
+            <span class="tip-popup" role="tooltip">
+              <strong>What is effect size?</strong>
+              A measure of how meaningful the change was — not just whether it happened. Researchers consider r = 0.30+ to be educationally significant. This is the largest effect size recorded for girls in the study.
+            </span>
+          </span>
+        </div>
+
+        <p class="result-plain">Girls went from rarely seeking out science to actively pursuing it — the hallmark of a student who sees herself as a scientist.</p>
+
+        <div class="confidence-wrap">
+          <div class="confidence-label-row">
+            <span class="confidence-label">Statistical confidence: 99.9%</span>
+            <span class="tip-wrap" data-tip="pval">
+              <button class="tip-btn" aria-label="What does statistical confidence mean?" aria-expanded="false">i</button>
+              <span class="tip-popup" role="tooltip">
+                <strong>What does p &lt; 0.001 mean?</strong>
+                Less than a 1-in-1,000 chance the result is a coincidence. The scientific gold standard is p &lt; 0.05. These results far exceed it — 99.9% confident this is real.
+              </span>
+            </span>
+          </div>
+          <div class="confidence-track"><div class="confidence-fill"></div></div>
+        </div>
+        <span class="result-badge">Largest effect size for girls</span>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="result-card fade-in">
+        <p class="result-statement">"I think I am good at technology"</p>
+
+        <div class="result-scores">
+          <span class="score-before">3.17</span>
+          <span class="score-arrow">→</span>
+          <span class="score-after">3.49</span>
+          <span class="score-scale-wrap">
+            <span class="score-scale">out of 5</span>
+            <span class="tip-wrap" data-tip="scale">
+              <button class="tip-btn" aria-label="What is the 1–5 scale?" aria-expanded="false">i</button>
+              <span class="tip-popup" role="tooltip">
+                <strong>What is the 1–5 scale?</strong>
+                Students rated agreement from 1 (Not at all) to 5 (Definitely yes). These scores show real shifts in how girls see themselves as scientists and inventors.
+              </span>
+            </span>
+          </span>
+        </div>
+
+        <div class="effect-size-row">
+          <span class="effect-size-label">Effect size:</span>
+          <span class="effect-size-val">Significant (p &lt; 0.001)</span>
+          <span class="tip-wrap" data-tip="effect">
+            <button class="tip-btn" aria-label="What is effect size?" aria-expanded="false">i</button>
+            <span class="tip-popup" role="tooltip">
+              <strong>What is effect size?</strong>
+              A measure of how meaningful the change was — not just whether it happened. This result was statistically significant at p &lt; 0.001 and girls' gains were larger than boys' on this item.
+            </span>
+          </span>
+        </div>
+
+        <p class="result-plain">Girls who started with moderate tech confidence came out with strong tech confidence — and this gain was significantly larger than boys' in the same program.</p>
+
+        <div class="confidence-wrap">
+          <div class="confidence-label-row">
+            <span class="confidence-label">Statistical confidence: 99.9%</span>
+            <span class="tip-wrap" data-tip="pval">
+              <button class="tip-btn" aria-label="What does statistical confidence mean?" aria-expanded="false">i</button>
+              <span class="tip-popup" role="tooltip">
+                <strong>What does p &lt; 0.001 mean?</strong>
+                Less than a 1-in-1,000 chance the result is a coincidence. The scientific gold standard is p &lt; 0.05. These results far exceed it — 99.9% confident this is real.
+              </span>
+            </span>
+          </div>
+          <div class="confidence-track"><div class="confidence-fill"></div></div>
+        </div>
+      </div>
+
+    </div><!-- /results-grid -->
+
+    <!-- Verbatim paper quote -->
+    <div class="paper-quote fade-in">
+      <p>"The 'Makers a les Aules' sessions had a more positive overall impact on girl students. This is evident not only because girls showed significant improvements on a greater number of items, but also because the magnitude of those improvements was larger compared to boys."</p>
+      <cite>— Santos et al. (2025), International Journal of Technology and Design Education</cite>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="process" aria-labelledby="process-headline">
+  <div class="container">
+    <span class="section-label label-red">The Program</span>
+    <h2 id="process-headline">Five sessions. Real invention. Real confidence.</h2>
+    <p class="process-body">Students engage in a structured Design Thinking journey — empathizing with a real-world problem, brainstorming solutions, and building an interactive prototype using Makey Makey and Scratch. No prior experience required.</p>
+    <div class="steps" role="list">
+      <div class="step fade-in" role="listitem">
+        <div class="step-num" aria-label="Step 1">1</div>
+        <p class="step-title">Empathize &amp; Define</p>
+        <p class="step-desc">Students explore a real-world problem — like ocean pollution — and define what they want to solve.</p>
+      </div>
+      <div class="step fade-in" role="listitem">
+        <div class="step-num" aria-label="Step 2">2</div>
+        <p class="step-title">Ideate</p>
+        <p class="step-desc">Teams brainstorm solutions and build a "wall of ideas" with sticky notes and collaborative discussion.</p>
+      </div>
+      <div class="step fade-in" role="listitem">
+        <div class="step-num" aria-label="Step 3">3</div>
+        <p class="step-title">Prototype</p>
+        <p class="step-desc">Students choose features for their invention and sketch their technological prototype design.</p>
+      </div>
+      <div class="step fade-in" role="listitem">
+        <div class="step-num" aria-label="Step 4">4</div>
+        <p class="step-title">Build &amp; Test</p>
+        <p class="step-desc">Using Makey Makey + Scratch, students bring their prototype to life as an interactive invention.</p>
+      </div>
+      <div class="step fade-in" role="listitem">
+        <div class="step-num" aria-label="Step 5">5</div>
+        <p class="step-title">Demo</p>
+        <p class="step-desc">Teams present their inventions to peers, reflecting on what worked and what they'd improve next.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCHER QUOTE -->
+<section class="quote-section" aria-labelledby="quote-headline">
+  <div class="container">
+    <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+    <blockquote id="quote-headline">
+      "Notably, girls showed marked improvements in self-efficacy following the intervention, suggesting that the design of the activities in the 'Makers a les Aules' may help counteract early gender disparities in STEM. These findings reinforce the importance of implementing inclusive, learner-centered pedagogies at a stage when students are forming foundational beliefs about their abilities and interests in STEM."
+    </blockquote>
+    <p class="quote-attribution">— Patricia Santos, Khadija El Aadmi, Miriam Calvera-Isabal &amp; Amaia Rodríguez</p>
+    <p class="quote-pub">International Journal of Technology and Design Education, Springer Nature, 2025</p>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="for-section" aria-labelledby="for-headline">
+  <div class="container">
+    <span class="section-label label-red">Built for Educators</span>
+    <h2 id="for-headline">Designed for classrooms. Proven in schools.</h2>
+    <div class="for-grid">
+      <div class="for-card fade-in">
+        <span class="for-icon" aria-hidden="true">🧑‍🏫</span>
+        <h3>K-12 Teachers</h3>
+        <p>Bring invention into your classroom with no coding background required. Makey Makey works with any conductive material — fruit, foil, pencil graphite. Your students do the rest.</p>
+        <a href="https://makeymakey.com/pages/educators">See classroom resources →</a>
+      </div>
+      <div class="for-card fade-in">
+        <span class="for-icon" aria-hidden="true">🏫</span>
+        <h3>School Administrators</h3>
+        <p>Support gender equity goals with an evidence-backed tool. This peer-reviewed study provides the documentation you need to justify curriculum investment and grant applications.</p>
+        <a href="https://makeymakey.com/pages/research" target="_blank" rel="noopener">Download the study →</a>
+      </div>
+      <div class="for-card fade-in">
+        <span class="for-icon" aria-hidden="true">📋</span>
+        <h3>Curriculum Coordinators</h3>
+        <p>Makey Makey scales from individual classrooms to district-wide STEM programs. Kits are reusable, durable, and curriculum-agnostic — compatible with science, technology, art, and more.</p>
+        <a href="https://makeymakey.com/pages/contact">Request a quote →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-final" aria-labelledby="cta-headline">
+  <div class="container">
+    <h2 id="cta-headline">Give every girl in your classroom a reason to say: "I'm an inventor."</h2>
+    <p class="cta-sub">Join thousands of educators using Makey Makey to close the STEM gender gap — one invention at a time.</p>
+    <div class="cta-btns">
+      <a href="https://makeymakey.com/products/makey-makey-kit" class="pill-btn btn-yellow">Shop Makey Makey</a>
+      <a href="https://makeymakey.com/pages/research" class="pill-btn btn-outline" target="_blank" rel="noopener">Read the Full Study</a>
+    </div>
+    <p class="citation">
+      Santos, P., El Aadmi, K., Calvera-Isabal, M., &amp; Rodríguez, A. (2025). Fostering students' motivation and self-efficacy in science, technology, engineering, and design through design thinking and making in project-based learning: a gender-perspective study in primary education. <em>International Journal of Technology and Design Education</em>, 35, 1293–1319.
+      <a href="https://doi.org/10.1007/s10798-025-10001-6" target="_blank" rel="noopener">https://doi.org/10.1007/s10798-025-10001-6</a>
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <span class="footer-logo">Makey Makey</span>
+    <p class="footer-tag">An Invention Kit for Everyone</p>
+    <ul class="footer-links" aria-label="Footer navigation">
+      <li><a href="https://makeymakey.com/products/makey-makey-kit">Shop</a></li>
+      <li><a href="https://makeymakey.com/pages/research">Research</a></li>
+      <li><a href="https://makeymakey.com/pages/educators">Educators</a></li>
+      <li><a href="https://makeymakey.com/pages/about">About</a></li>
+      <li><a href="https://makeymakey.com/pages/contact">Contact</a></li>
+    </ul>
+    <div class="footer-social" aria-label="Social media">
+      <a href="https://twitter.com/makeymakey" target="_blank" rel="noopener" aria-label="X / Twitter">𝕏</a>
+      <a href="https://youtube.com/@makeymakey" target="_blank" rel="noopener" aria-label="YouTube">▶</a>
+      <a href="https://instagram.com/makeymakey" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+    </div>
+    <p class="footer-copy">&copy; 2025 JoyLabz LLC. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── Fade-in on scroll ─────────────────────────────────── */
+  var fades = document.querySelectorAll('.fade-in');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    fades.forEach(function (el) { io.observe(el); });
+  } else {
+    fades.forEach(function (el) { el.classList.add('visible'); });
+  }
+
+  /* ── Count-up numbers ──────────────────────────────────── */
+  var counters = document.querySelectorAll('.count-up');
+  if ('IntersectionObserver' in window) {
+    var co = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target, target = parseInt(el.getAttribute('data-target'), 10), cur = 0;
+        var step = Math.max(1, Math.ceil(target / 55));
+        var t = setInterval(function () {
+          cur += step;
+          if (cur >= target) { cur = target; clearInterval(t); }
+          el.textContent = cur.toLocaleString();
+        }, 22);
+        co.unobserve(el);
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(function (el) { co.observe(el); });
+  } else {
+    counters.forEach(function (el) {
+      el.textContent = parseInt(el.getAttribute('data-target'), 10).toLocaleString();
+    });
+  }
+
+  /* ── Tooltip popovers ──────────────────────────────────── */
+  var activePopup = null;
+
+  function closeAll() {
+    if (!activePopup) return;
+    activePopup.classList.remove('tip-visible');
+    var btn = activePopup.previousElementSibling;
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+    activePopup = null;
+  }
+
+  document.querySelectorAll('.tip-btn').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var popup = btn.nextElementSibling;
+      var isOpen = popup.classList.contains('tip-visible');
+      closeAll();
+      if (!isOpen) {
+        popup.classList.add('tip-visible');
+        btn.setAttribute('aria-expanded', 'true');
+        activePopup = popup;
+        /* Edge-detection: flip to left/right if near viewport edges */
+        var rect = popup.getBoundingClientRect();
+        var wrap = btn.closest('.tip-wrap');
+        wrap.classList.remove('tip-left','tip-right');
+        if (rect.left < 0) wrap.classList.add('tip-left');
+        else if (rect.right > window.innerWidth) wrap.classList.add('tip-right');
+      }
+    });
+  });
+
+  document.addEventListener('click', closeAll);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeAll();
+  });
+})();
+</script>
+
+</body>
+</html>
